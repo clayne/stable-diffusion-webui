@@ -65,12 +65,15 @@ class Upscaler:
 
             shape = (img.width, img.height)
 
+            print("upscale pre: img.width == %d, img.height == %d" % (img.width, img.height))
             img = self.do_upscale(img, selected_model)
+            print("upscale post: img.width == %d, img.height == %d" % (img.width, img.height))
 
             if shape == (img.width, img.height):
                 break
 
         if img.width != dest_w or img.height != dest_h:
+            print("img.width == %d, img.height == %d, dest_w == %d, dest_h == %d, resizing with LANCZOS" % (img.width, img.height, dest_w, dest_h))
             img = img.resize((int(dest_w), int(dest_h)), resample=LANCZOS)
 
         return img
